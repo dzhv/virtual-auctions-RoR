@@ -8,9 +8,9 @@ class Errors
   class InsufficientBidError < Error
   end
 
-  # # Insufficient bid amount error
-  # class InsufficientFundsError < Error
-  # end
+  # Insufficient funds error
+  class InsufficientFundsError < Error
+  end
 
   # # Not found exception
   # class NotFoundError < Error

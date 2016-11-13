@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112102709) do
+ActiveRecord::Schema.define(version: 20161113152049) do
 
   create_table "accounts", force: :cascade do |t|
-    t.decimal  "balance",    precision: 5, scale: 2
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.decimal  "balance",    precision: 5, scale: 2, default: "0.0"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
