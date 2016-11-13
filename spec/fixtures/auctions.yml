@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bike_auction:
+  user: jonas
+  starting_price:  100
+  buyout_price:  250
+  state: 'active'
+
+dog_auction:
+  user: two
+  starting_price: 50
+  buyout_price: 100
+  state: 'active'

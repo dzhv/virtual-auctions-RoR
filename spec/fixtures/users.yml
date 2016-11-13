@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+jonas:
+  first_name: Jonas
+  last_name: Biliunas
+  email: jonas@mif.vu.lt
+  tel_no: 123
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  tel_no: MyString

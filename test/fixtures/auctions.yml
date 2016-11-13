@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  starting_price: 
+  starting_price: 
+  buyout_price: 
+  buyout_price: 
+  state: MyString
+
+two:
+  user: two
+  starting_price: 
+  starting_price: 
+  buyout_price: 
+  buyout_price: 
+  state: MyString
