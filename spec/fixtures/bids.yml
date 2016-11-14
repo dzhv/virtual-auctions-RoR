@@ -6,6 +6,5 @@ one:
   amount: 0
 
 two:
-  user: two
-  amount: 9.99
-  auction: two
+  auction: dog_auction
+  amount: 0

@@ -1,3 +1,6 @@
+require 'rails_helper'
+require_relative '../../app/errors/errors'
+
 describe Account do
   let(:account) { described_class.new }
 
@@ -9,6 +12,7 @@ describe Account do
     let(:balance_before_withdraw) { 50 }
     let(:withdraw_amount) { 100 }
     before(:each) do
+      allow(account).to receive(:save!) { true }
       account.add_money(balance_before_withdraw)
     end
 

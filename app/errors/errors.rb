@@ -12,6 +12,10 @@ class Errors
   class InsufficientFundsError < Error
   end
 
+  # Exception for not allowed actions
+  class NotAllowedError < Error
+  end
+
   # # Not found exception
   # class NotFoundError < Error
   # end
@@ -22,9 +26,5 @@ class Errors
 
   # # Exception for unauthorized actions
   # class UnauthorizedError < Error
-  # end
-
-  # # Exception for not allowed actions
-  # class NotAllowedError < Error
   # end
 end

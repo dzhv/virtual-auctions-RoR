@@ -13,4 +13,8 @@ class Bid < ApplicationRecord
     user == other.user &&
       amount == other.amount
   end
+
+  def refund_bidder
+    user.add_money(amount)
+  end
 end

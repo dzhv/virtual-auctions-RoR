@@ -7,7 +7,7 @@ bike_auction:
   state: 'active'
 
 dog_auction:
-  user: two
+  user: jurgis
   starting_price: 50
   buyout_price: 100
   state: 'active'

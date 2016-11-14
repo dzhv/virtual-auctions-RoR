@@ -4,12 +4,17 @@ class Account < ApplicationRecord
 
   def add_money(amount)
     self.balance += amount
+    save!
   end
 
   def withdraw(amount)
-    if amount > balance
-      raise Errors::InsufficientFundsError.new, 'Withdraw is not allowed'
-    end
+    confirm_funds(amount)
     self.balance -= amount
+    save!
+  end
+
+  def confirm_funds(amount)
+    return if balance >= amount
+    raise Errors::InsufficientFundsError.new, 'Insufficient funds'
   end
 end

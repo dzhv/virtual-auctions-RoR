@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  balance: 
-  balance: 
+jurgis_account:
+  user: jurgis
+  balance: 100
 
-two:
-  balance: 
-  balance: 
+antanas_account:
+  user: antanas
+  balance: 300
+
+jonas_account:
+  user: jonas
+  balance: 200

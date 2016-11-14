@@ -6,8 +6,14 @@ jonas:
   email: jonas@mif.vu.lt
   tel_no: 123
 
-two:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  tel_no: MyString
+jurgis:
+  first_name: Jurgis
+  last_name: Savickis
+  email: jurgis@gmail.com
+  tel_no: 9393
+
+antanas:
+  first_name: Antanas
+  last_name: Skema
+  email: as@gmail.com
+  tel_no: 92929
