@@ -21,7 +21,7 @@ RSpec.describe Auction, type: 'model' do
     end.to raise_error(Errors::InsufficientBidError)
   end
 
-  it 'appropriate auction gets created' do
+  it 'is appropriately created' do
     auction_data = bike_auction.attributes
     auction_data[:id] = SecureRandom.uuid
     auction = Auction.create(auction_data)
@@ -103,6 +103,12 @@ RSpec.describe Auction, type: 'model' do
     end
   end
 
+  it 'refunds bidder on buyout' do
+    bike_auction.place_bid(first_user, 100)
+    expect(bike_auction.current_bid).to receive(:refund_bidder)
+    bike_auction.buyout(second_user)
+  end
+
   it 'can not be bought with insufficient funds' do
     allow(first_user.account).to receive(:balance) { 0 }
     expect do
@@ -116,13 +122,6 @@ RSpec.describe Auction, type: 'model' do
       auction = Auction.find(dog_auction.id)
       expect(auction).to be_closed
     end
-
-    # it 'does not allow to close other people auctions' do
-    #   user = first_bidder
-    #   expect do
-    #     bid_manager.close_auction(user.id, auction.identifier.id)
-    #   end.to raise_error(Errors::UnauthorizedError)
-    # end
 
     it 'cannot be closed if bidded' do
       bike_auction.place_bid(first_user, 100)

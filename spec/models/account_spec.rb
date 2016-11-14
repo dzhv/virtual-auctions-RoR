@@ -22,4 +22,10 @@ describe Account do
       end.to raise_error(Errors::InsufficientFundsError)
     end
   end
+
+  it 'saves money adjustments' do
+    expect(account).to receive(:save!).twice { true }
+    account.add_money(150)
+    account.withdraw(100)
+  end
 end

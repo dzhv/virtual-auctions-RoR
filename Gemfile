@@ -37,6 +37,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '3.5'
   gem 'rubocop-rspec'
+  gem 'rspec-activemodel-mocks'
 end
 
 group :development do

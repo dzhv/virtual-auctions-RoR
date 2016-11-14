@@ -4,7 +4,9 @@ require_relative '../errors/errors'
 class Auction < ApplicationRecord
   belongs_to :user
   has_one :item
-  has_one :current_bid, foreign_key: 'auction_id', class_name: 'Bid', dependent: :destroy
+  has_one :current_bid, foreign_key: 'auction_id',
+                        class_name: 'Bid',
+                        dependent: :destroy
 
   scope :by_user, ->(user_id) { where(user_id: user_id) }
   scope :active, -> { where(state: 'active') }
