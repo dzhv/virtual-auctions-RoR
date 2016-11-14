@@ -1,5 +1,5 @@
 require 'simplecov'
-#require_relative('support/matchers/be_hashed.rb')
+require_relative('support/matchers/be_hashed.rb')
 require_relative('support/matchers/have_bid.rb')
 require_relative('support/matchers/be_closed.rb')
 SimpleCov.start

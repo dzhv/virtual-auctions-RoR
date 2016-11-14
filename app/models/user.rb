@@ -1,11 +1,15 @@
+require 'digest/sha1'
+
 # System user
 class User < ApplicationRecord
   has_one :account
   has_many :auction
   has_many :bid
 
-  after_initialize do
-    self.account = Account.new if new_record?
+  before_save do
+    return unless new_record?
+    self.account = Account.new
+    self.password = Digest::SHA1.hexdigest(password)
   end
 
   def add_money(amount)

@@ -5,6 +5,7 @@ RSpec.describe Auction, type: 'model' do
   fixtures :auctions
   fixtures :users
   fixtures :bids
+  fixtures :accounts
   let(:auction) { Auction.new }
   let(:first_user) { @jonas }
   let(:initial_first_user_balance) { first_user.account.balance }
@@ -50,9 +51,9 @@ RSpec.describe Auction, type: 'model' do
 
   context 'on bidding' do
     before(:each) do
-        initial_first_user_balance
-        bike_auction.place_bid(first_user, 50)
-      end
+      initial_first_user_balance
+      bike_auction.place_bid(first_user, 50)
+    end
     context 'on first bid' do
       it 'reduces bidder\'s account balance' do
         bidder = User.find(first_user.id)
@@ -72,7 +73,9 @@ RSpec.describe Auction, type: 'model' do
       bike_auction.place_bid(second_user, 200)
 
       overthrown_bidder = User.find(first_user.id)
-      expect(overthrown_bidder.account.balance).to eq(initial_first_user_balance)
+      expect(overthrown_bidder.account.balance).to eq(
+        initial_first_user_balance
+      )
     end
   end
 
@@ -111,7 +114,7 @@ RSpec.describe Auction, type: 'model' do
     it 'can be closed' do
       dog_auction.close
       auction = Auction.find(dog_auction.id)
-      expect(dog_auction).to be_closed
+      expect(auction).to be_closed
     end
 
     # it 'does not allow to close other people auctions' do
