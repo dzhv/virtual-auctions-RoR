@@ -52,8 +52,10 @@ describe User do
 
     it 'withdraws money when sufficient funds' do
       user.add_money(buyout_amount)
-      expect(user).to receive(:withdraw_money).with(buyout_amount)
+      initial_balance = user.account.balance
+
       user.make_buyout_transaction(buyout_amount)
+      expect(user.account.balance).to eq(initial_balance - buyout_amount)
     end
 
     it 'does not withdraw money when insufficient funds' do

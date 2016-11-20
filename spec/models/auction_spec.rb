@@ -119,6 +119,13 @@ RSpec.describe Auction, type: 'model' do
     bike_auction.buyout(second_user)
   end
 
+  it 'does not initiate refunding when there were no bids' do
+    empty_bid = Bid.empty
+    allow(bike_auction).to receive(:current_bid) { empty_bid }
+    expect(empty_bid).to receive(:refund_bidder).exactly(0).times
+    bike_auction.buyout(second_user)
+  end
+
   it 'can not be bought with insufficient funds' do
     allow(first_user.account).to receive(:balance) { 0 }
     expect do
