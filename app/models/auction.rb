@@ -19,8 +19,8 @@ class Auction < ApplicationRecord
   end
 
   def place_bid(user, bid_amount)
-    if bid_amount < current_bid.amount
-      raise Errors::InsufficientBidError.new, 'Bid is too low'
+    if bid_amount <= current_bid.amount
+      raise Errors::InsufficientBidError, 'Bid is too low'
     end
     handle_bid_transactions(user, bid_amount)
   end
@@ -28,7 +28,7 @@ class Auction < ApplicationRecord
   def handle_bid_transactions(user, bid_amount)
     user.withdraw_money(bid_amount)
     refund_bidder
-    self.current_bid = Bid.new(user: user, auction: self, amount: bid_amount)
+    self.current_bid = Bid.new(user: user, amount: bid_amount)
   end
 
   def buyout(user)
@@ -49,13 +49,9 @@ class Auction < ApplicationRecord
 
   def close
     if current_bid != Bid.empty
-      raise Errors::NotAllowedError.new, 'Cannot close bidded auction'
+      raise Errors::NotAllowedError, 'Cannot close bidded auction'
     end
     self.state = 'closed'
     save!
-  end
-
-  def active?
-    state == 'active'
   end
 end

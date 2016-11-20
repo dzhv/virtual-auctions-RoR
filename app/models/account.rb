@@ -15,6 +15,6 @@ class Account < ApplicationRecord
 
   def confirm_funds(amount)
     return if balance >= amount
-    raise Errors::InsufficientFundsError.new, 'Insufficient funds'
+    raise Errors::InsufficientFundsError, 'Insufficient funds'
   end
 end

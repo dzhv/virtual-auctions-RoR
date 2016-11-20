@@ -7,18 +7,25 @@ RSpec.describe Auction, type: 'model' do
   fixtures :bids
   fixtures :accounts
   let(:auction) { Auction.new }
-  let(:first_user) { @jonas }
+  let(:first_user) { users(:jonas) }
   let(:initial_first_user_balance) { first_user.account.balance }
-  let(:second_user) { @antanas }
+  let(:second_user) { users(:antanas) }
   let(:initial_second_user_balance) { second_user.account.balance }
-  let(:bike_auction) { @bike_auction }
-  let(:dog_auction) { @dog_auction }
+  let(:bike_auction) { auctions(:bike_auction) }
+  let(:dog_auction) { auctions(:dog_auction) }
 
   it 'does not allow lower amount bids' do
     auction.place_bid(first_user, 200)
     expect do
       auction.place_bid(second_user, 150)
-    end.to raise_error(Errors::InsufficientBidError)
+    end.to raise_error(Errors::InsufficientBidError, 'Bid is too low')
+  end
+
+  it 'does not allow same amount bids' do
+    auction.place_bid(first_user, 200)
+    expect do
+      auction.place_bid(second_user, 200)
+    end.to raise_error(Errors::InsufficientBidError, 'Bid is too low')
   end
 
   it 'is appropriately created' do
@@ -64,7 +71,8 @@ RSpec.describe Auction, type: 'model' do
         bidded_auction = Auction.find(bike_auction.id)
         expect(bidded_auction.current_bid).to have_attributes(
           user_id: first_user.id,
-          amount: 50
+          amount: 50,
+          auction_id: bidded_auction.id
         )
       end
     end
@@ -99,7 +107,9 @@ RSpec.describe Auction, type: 'model' do
 
     it 'is marked as bought' do
       auction = Auction.find(bike_auction.id)
-      expect(auction.active?).to be false
+      expect(auction).to have_attributes(
+        state: 'bought'
+      )
     end
   end
 
@@ -127,7 +137,10 @@ RSpec.describe Auction, type: 'model' do
       bike_auction.place_bid(first_user, 100)
       expect do
         bike_auction.close
-      end.to raise_error(Errors::NotAllowedError)
+      end.to raise_error(
+        Errors::NotAllowedError,
+        'Cannot close bidded auction'
+      )
     end
   end
 end

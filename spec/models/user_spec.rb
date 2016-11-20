@@ -3,7 +3,7 @@ require_relative '../../app/errors/errors'
 
 describe User do
   fixtures :users
-  let(:prototype_user) { @jonas }
+  let(:prototype_user) { users(:jonas) }
   let(:password) { 'password' }
   let(:username) { 'username' }
   let(:user) do
@@ -45,5 +45,21 @@ describe User do
 
   it 'it\'s password is hashed' do
     expect(user.password).to be_hashed(password)
+  end
+
+  context 'on buyout transaction' do
+    let(:buyout_amount) { 1000 }
+
+    it 'withdraws money when sufficient funds' do
+      user.add_money(buyout_amount)
+      expect(user).to receive(:withdraw_money).with(buyout_amount)
+      user.make_buyout_transaction(buyout_amount)
+    end
+
+    it 'does not withdraw money when insufficient funds' do
+      expect do
+        user.make_buyout_transaction(buyout_amount)
+      end.to raise_error(Errors::InsufficientFundsError)
+    end
   end
 end

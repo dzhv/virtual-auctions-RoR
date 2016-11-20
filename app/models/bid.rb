@@ -4,14 +4,14 @@ class Bid < ApplicationRecord
   belongs_to :auction
 
   def self.empty
-    bid = Bid.new
+    bid = new
     bid.amount = 0
     bid
   end
 
   def ==(other)
-    user == other.user &&
-      amount == other.amount
+    user.equal?(other.user) &&
+      amount.eql?(other.amount)
   end
 
   def refund_bidder

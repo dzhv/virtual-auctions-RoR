@@ -20,12 +20,7 @@ class User < ApplicationRecord
     account.withdraw(amount)
   end
 
-  def confirm_funds(amount)
-    account.confirm_funds(amount)
-  end
-
   def make_buyout_transaction(buyout_price)
-    confirm_funds(buyout_price)
     withdraw_money(buyout_price)
   end
 end
