@@ -1,0 +1,6 @@
+<h1>Enter your credentials</h1>
+<%= form_tag sign_in_path do %>
+  <%= text_field_tag 'username', nil,  placeholder: 'Username' %>
+  <%= text_field_tag 'password', nil, placeholder: 'Password' %>
+  <%= submit_tag 'Sign in' %>
+<% end %>

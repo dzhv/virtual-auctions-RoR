@@ -1,5 +1,6 @@
 require 'rails_helper'
 require_relative '../../app/errors/errors'
+require 'digest/sha1'
 
 describe User do
   fixtures :users
@@ -63,5 +64,20 @@ describe User do
         user.make_buyout_transaction(buyout_amount)
       end.to raise_error(Errors::InsufficientFundsError)
     end
+  end
+
+  it 'can login' do
+    user
+    logged_in_user = User.login(username, password)
+    expect(logged_in_user.id).to eq(user.id)
+  end
+
+  it 'does not allow to login with bad password' do
+    user
+    expect do User.login(username, "bad password")
+    end.to raise_error(
+      Errors::WrongCredentialsError,
+      'Wrong username or password'
+    )
   end
 end

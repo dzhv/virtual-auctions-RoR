@@ -16,13 +16,9 @@ class Errors
   class NotAllowedError < Error
   end
 
-  # # Not found exception
-  # class NotFoundError < Error
-  # end
-
-  # # Wrong credentials entered exception
-  # class WrongCredentialsError < Error
-  # end
+  # Wrong credentials entered exception
+  class WrongCredentialsError < Error
+  end
 
   # # Exception for unauthorized actions
   # class UnauthorizedError < Error
