@@ -6,6 +6,7 @@ class LoginController < ApplicationController
   def show
     @username = ''
     @password = ''
+    @notice = params[:notice]
   end
 
   def log_in
@@ -25,7 +26,7 @@ class LoginController < ApplicationController
 
   def bad_credentials_responce(error)
     respond_to do |format|
-      format.html { redirect_to show, notice: error.message }
+      format.html { redirect_to action: 'show', notice: error.message }
     end
   end
 end

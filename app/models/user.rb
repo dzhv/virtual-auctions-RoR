@@ -12,9 +12,7 @@ class User < ApplicationRecord
   end)
 
   before_save do
-    return unless new_record?
-    self.account = Account.new
-    self.password = Digest::SHA1.hexdigest(password)
+    configure_new_user if new_record?
   end
 
   def add_money(amount)
@@ -36,5 +34,12 @@ class User < ApplicationRecord
       raise Errors::WrongCredentialsError, 'Wrong username or password'
     end
     user
+  end
+
+  private
+
+  def configure_new_user
+    self.account = Account.new
+    self.password = Digest::SHA1.hexdigest(password)
   end
 end

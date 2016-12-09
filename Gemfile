@@ -38,6 +38,7 @@ group :development, :test do
   gem 'rspec-rails', '3.5'
   gem 'rubocop-rspec'
   gem 'rspec-activemodel-mocks'
+  gem 'rails-controller-testing'
   gem 'mutant-rspec', '~> 0.8.11'
   gem 'mutant', '~> 0.8.12'
 end
