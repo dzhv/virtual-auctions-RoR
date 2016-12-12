@@ -1,9 +1,15 @@
 require 'rails_helper'
+require 'digest/sha1'
 
 RSpec.describe UsersController, type: :controller do
   let(:valid_attributes) do
     {
-      password: 'password'
+      password: 'password',
+      first_name: 'first name',
+      last_name: 'last name',
+      email: 'email@email.email',
+      tel_no: '30203030',
+      username: 'user name'
     }
   end
 
@@ -44,6 +50,14 @@ RSpec.describe UsersController, type: :controller do
         expect do
           post :create, params: { user: valid_attributes }
         end.to change(User, :count).by(1)
+      end
+
+      it 'creates User with all attributes' do
+        post :create, params: { user: valid_attributes }
+        valid_attributes[:password] = Digest::SHA1.hexdigest(
+          valid_attributes[:password]
+        )
+        expect(User.last).to have_attributes(valid_attributes)
       end
 
       it 'redirects to the created user' do

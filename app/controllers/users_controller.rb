@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     return unless user.save
     respond_to do |format|
-      format.html { redirect_to user, notice: 'User was created.' }
+      format.html { redirect_to user }
     end
   end
 
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     user = find_user
     return unless user.update(user_params)
     respond_to do |format|
-      format.html { redirect_to user, notice: 'User was updated.' }
+      format.html { redirect_to }
     end
   end
 
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   def destroy
     find_user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was destroyed.' }
+      format.html { redirect_to users_url }
     end
   end
 
@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def find_user
-    User.find(params[:id])
+    User.find(params.fetch(:id))
   end
 
   # Never trust parameters from the scary internet,
