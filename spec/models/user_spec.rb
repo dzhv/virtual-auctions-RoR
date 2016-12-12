@@ -68,13 +68,14 @@ describe User do
 
   it 'can login' do
     user
-    logged_in_user = User.login(username, password)
+    logged_in_user = described_class.login(username, password)
     expect(logged_in_user.id).to eq(user.id)
   end
 
   it 'does not allow to login with bad password' do
     user
-    expect do User.login(username, "bad password")
+    expect do
+      described_class.login(username, 'bad password')
     end.to raise_error(
       Errors::WrongCredentialsError,
       'Wrong username or password'
